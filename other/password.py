@@ -1,5 +1,4 @@
 import secrets
-from random import shuffle
 from string import ascii_letters, ascii_lowercase, ascii_uppercase, digits, punctuation
 
 
@@ -41,7 +40,7 @@ def alternative_password_generator(chars_incl: str, i: int) -> str:
         + random(punctuation, quotient)
     )
     list_of_chars = list(chars)
-    shuffle(list_of_chars)
+    secrets.SystemRandom().shuffle(list_of_chars)
     return "".join(list_of_chars)
 
     # random is a generalised function for letters, characters and numbers

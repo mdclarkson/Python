@@ -27,17 +27,17 @@ Game-Of-Life Rules:
  Any dead cell with exactly three live neighbours be-
  comes a live cell, as if by reproduction.
  """
-import random
 import sys
 
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.colors import ListedColormap
+import secrets
 
 usage_doc = "Usage of script: script_name <size_of_canvas:int>"
 
 choice = [0] * 100 + [1] * 10
-random.shuffle(choice)
+secrets.SystemRandom().shuffle(choice)
 
 
 def create_canvas(size: int) -> list[list[bool]]:
@@ -48,7 +48,7 @@ def create_canvas(size: int) -> list[list[bool]]:
 def seed(canvas: list[list[bool]]) -> None:
     for i, row in enumerate(canvas):
         for j, _ in enumerate(row):
-            canvas[i][j] = bool(random.getrandbits(1))
+            canvas[i][j] = bool(secrets.SystemRandom().getrandbits(1))
 
 
 def run(canvas: list[list[bool]]) -> list[list[bool]]:

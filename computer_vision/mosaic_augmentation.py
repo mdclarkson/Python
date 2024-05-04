@@ -2,11 +2,11 @@
 
 import glob
 import os
-import random
 from string import ascii_lowercase, digits
 
 import cv2
 import numpy as np
+import secrets
 
 # Parameters
 OUTPUT_SIZE = (720, 1280)  # Height, Width
@@ -26,7 +26,7 @@ def main() -> None:
     """
     img_paths, annos = get_dataset(LABEL_DIR, IMG_DIR)
     for index in range(NUMBER_IMAGES):
-        idxs = random.sample(range(len(annos)), 4)
+        idxs = secrets.SystemRandom().sample(range(len(annos)), 4)
         new_image, new_annos, path = update_image_and_anno(
             img_paths,
             annos,
@@ -105,8 +105,8 @@ def update_image_and_anno(
         - path[0] <type: string>: get the name of image file
     """
     output_img = np.zeros([output_size[0], output_size[1], 3], dtype=np.uint8)
-    scale_x = scale_range[0] + random.random() * (scale_range[1] - scale_range[0])
-    scale_y = scale_range[0] + random.random() * (scale_range[1] - scale_range[0])
+    scale_x = scale_range[0] + secrets.SystemRandom().random() * (scale_range[1] - scale_range[0])
+    scale_y = scale_range[0] + secrets.SystemRandom().random() * (scale_range[1] - scale_range[0])
     divid_point_x = int(scale_x * output_size[1])
     divid_point_y = int(scale_y * output_size[0])
 
@@ -178,7 +178,7 @@ def random_chars(number_char: int) -> str:
     """
     assert number_char > 1, "The number of character should greater than 1"
     letter_code = ascii_lowercase + digits
-    return "".join(random.choice(letter_code) for _ in range(number_char))
+    return "".join(secrets.choice(letter_code) for _ in range(number_char))
 
 
 if __name__ == "__main__":

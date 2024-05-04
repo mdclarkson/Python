@@ -21,9 +21,9 @@ Overview:
 from __future__ import annotations
 
 import math
-import random
 from collections.abc import Collection
 from typing import overload
+import secrets
 
 
 class Vector:
@@ -227,8 +227,8 @@ def random_vector(n: int, a: int, b: int) -> Vector:
     output: returns a random vector of size N, with
             random integer components between 'a' and 'b'.
     """
-    random.seed(None)
-    ans = [random.randint(a, b) for _ in range(n)]
+    secrets.SystemRandom().seed(None)
+    ans = [secrets.SystemRandom().randint(a, b) for _ in range(n)]
     return Vector(ans)
 
 
@@ -431,8 +431,8 @@ def random_matrix(width: int, height: int, a: int, b: int) -> Matrix:
     returns a random matrix WxH with integer components
     between 'a' and 'b'
     """
-    random.seed(None)
+    secrets.SystemRandom().seed(None)
     matrix: list[list[float]] = [
-        [random.randint(a, b) for _ in range(width)] for _ in range(height)
+        [secrets.SystemRandom().randint(a, b) for _ in range(width)] for _ in range(height)
     ]
     return Matrix(matrix, width, height)
