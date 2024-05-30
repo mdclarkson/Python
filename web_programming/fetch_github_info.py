@@ -21,8 +21,7 @@ from __future__ import annotations
 
 import os
 from typing import Any
-
-import requests
+from security import safe_requests
 
 BASE_URL = "https://api.github.com"
 
@@ -41,7 +40,7 @@ def fetch_github_info(auth_token: str) -> dict[Any, Any]:
         "Authorization": f"token {auth_token}",
         "Accept": "application/vnd.github.v3+json",
     }
-    return requests.get(AUTHENTICATED_USER_ENDPOINT, headers=headers).json()
+    return safe_requests.get(AUTHENTICATED_USER_ENDPOINT, headers=headers).json()
 
 
 if __name__ == "__main__":  # pragma: no cover

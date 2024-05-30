@@ -4,11 +4,10 @@ This works for some of us but fails for others.
 """
 
 from datetime import UTC, date, datetime
-
-import requests
 from rich import box
 from rich import console as rich_console
 from rich import table as rich_table
+from security import safe_requests
 
 LIMIT = 10
 TODAY = datetime.now(tz=UTC)
@@ -57,7 +56,7 @@ def get_forbes_real_time_billionaires() -> list[dict[str, int | str]]:
     Returns:
         List of top 10 realtime billionaires data.
     """
-    response_json = requests.get(API_URL).json()
+    response_json = safe_requests.get(API_URL).json()
     return [
         {
             "Name": person["personName"],

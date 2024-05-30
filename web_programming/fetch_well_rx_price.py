@@ -8,7 +8,7 @@ after providing the drug name and zipcode.
 from urllib.error import HTTPError
 
 from bs4 import BeautifulSoup
-from requests import exceptions, get
+from security.safe_requests import exceptions, get
 
 BASE_URL = "https://www.wellrx.com/prescriptions/{0}/{1}/?freshSearch=true"
 

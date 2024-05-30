@@ -1,6 +1,6 @@
-import requests
 from bs4 import BeautifulSoup, NavigableString, Tag
 from fake_useragent import UserAgent
+from security import safe_requests
 
 BASE_URL = "https://ww1.gogoanime2.org"
 
@@ -27,8 +27,7 @@ def search_scraper(anime_name: str) -> list:
     # concat the name to form the search url.
     search_url = f"{BASE_URL}/search/{anime_name}"
 
-    response = requests.get(
-        search_url, headers={"UserAgent": UserAgent().chrome}
+    response = safe_requests.get(search_url, headers={"UserAgent": UserAgent().chrome}
     )  # request the url.
 
     # Is the response ok?
@@ -82,7 +81,7 @@ def search_anime_episode_list(episode_endpoint: str) -> list:
 
     request_url = f"{BASE_URL}{episode_endpoint}"
 
-    response = requests.get(url=request_url, headers={"UserAgent": UserAgent().chrome})
+    response = safe_requests.get(url=request_url, headers={"UserAgent": UserAgent().chrome})
     response.raise_for_status()
 
     soup = BeautifulSoup(response.text, "html.parser")
@@ -131,8 +130,7 @@ def get_anime_episode(episode_endpoint: str) -> list:
 
     episode_page_url = f"{BASE_URL}{episode_endpoint}"
 
-    response = requests.get(
-        url=episode_page_url, headers={"User-Agent": UserAgent().chrome}
+    response = safe_requests.get(url=episode_page_url, headers={"User-Agent": UserAgent().chrome}
     )
     response.raise_for_status()
 

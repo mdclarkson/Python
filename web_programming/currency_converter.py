@@ -4,8 +4,7 @@ https://www.amdoren.com
 """
 
 import os
-
-import requests
+from security import safe_requests
 
 URL_BASE = "https://www.amdoren.com/api/currency.php"
 
@@ -176,7 +175,7 @@ def convert_currency(
     params = locals()
     # from is a reserved keyword
     params["from"] = params.pop("from_")
-    res = requests.get(URL_BASE, params=params).json()
+    res = safe_requests.get(URL_BASE, params=params).json()
     return str(res["amount"]) if res["error"] == 0 else res["error_message"]
 
 
