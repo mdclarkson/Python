@@ -4,9 +4,7 @@ that are best described as compass locations.
 
 @ https://en.wikipedia.org/wiki/Word_search
 """
-
-
-from random import choice, randint, shuffle
+import secrets
 
 # The words to display on the word search -
 # can be made dynamic by randonly selecting a certain number of
@@ -338,11 +336,11 @@ class WordSearch:
             # Shuffle the row order and column order that is used when brute forcing
             # the insertion of the word
             rows, cols = list(range(self.height)), list(range(self.width))
-            shuffle(rows)
-            shuffle(cols)
+            secrets.SystemRandom().shuffle(rows)
+            secrets.SystemRandom().shuffle(cols)
 
             # Insert the word via the direction
-            choice(directions)(word, rows, cols)
+            secrets.choice(directions)(word, rows, cols)
 
 
 def visualise_word_search(
@@ -382,7 +380,7 @@ def visualise_word_search(
                 character = letter
             # Empty char, so add a fake char
             elif add_fake_chars:
-                character = chr(randint(97, 122))
+                character = chr(secrets.SystemRandom().randint(97, 122))
             result += f"{character} "
         result += "\n"
     print(result, end="")

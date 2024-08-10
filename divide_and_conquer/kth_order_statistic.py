@@ -9,8 +9,7 @@ For more information of this algorithm:
 https://web.stanford.edu/class/archive/cs/cs161/cs161.1138/lectures/08/Small08.pdf
 """
 from __future__ import annotations
-
-from random import choice
+import secrets
 
 
 def random_pivot(lst):
@@ -19,7 +18,7 @@ def random_pivot(lst):
     We can use a more sophisticated algorithm here, such as the median-of-medians
     algorithm.
     """
-    return choice(lst)
+    return secrets.choice(lst)
 
 
 def kth_number(lst: list[int], k: int) -> int:
