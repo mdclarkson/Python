@@ -1,10 +1,9 @@
 import webbrowser
 from sys import argv
 from urllib.parse import parse_qs, quote
-
-import requests
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
+from security import safe_requests
 
 if __name__ == "__main__":
     query = "%20".join(argv[1:]) if len(argv) > 1 else quote(str(input("Search: ")))
@@ -13,7 +12,7 @@ if __name__ == "__main__":
 
     url = f"https://www.google.com/search?q={query}&num=100"
 
-    res = requests.get(
+    res = safe_requests.get(
         url,
         headers={"User-Agent": str(UserAgent().random)},
     )

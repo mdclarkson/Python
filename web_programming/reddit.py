@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import requests
+from security import safe_requests
 
 valid_terms = set(
     """approved_at_utc approved_by author_flair_background_color
@@ -28,7 +29,7 @@ def get_subreddit_data(
     if invalid_search_terms := ", ".join(sorted(set(wanted_data) - valid_terms)):
         msg = f"Invalid search term: {invalid_search_terms}"
         raise ValueError(msg)
-    response = requests.get(
+    response = safe_requests.get(
         f"https://reddit.com/r/{subreddit}/{age}.json?limit={limit}",
         headers={"User-agent": "A random string"},
     )
