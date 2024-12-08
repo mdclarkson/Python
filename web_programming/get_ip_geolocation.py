@@ -1,4 +1,5 @@
 import requests
+from security import safe_requests
 
 
 # Function to get geolocation data for an IP address
@@ -8,7 +9,7 @@ def get_ip_geolocation(ip_address: str) -> str:
         url = f"https://ipinfo.io/{ip_address}/json"
 
         # Send a GET request to the API
-        response = requests.get(url)
+        response = safe_requests.get(url)
 
         # Check if the HTTP request was successful
         response.raise_for_status()
