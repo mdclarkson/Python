@@ -12,7 +12,7 @@ Author: Clark
 """
 
 import copy
-import random
+import secrets
 
 cities = {
     0: [0, 0],
@@ -203,8 +203,7 @@ def city_select(
         )
         probabilities.append(probability)
 
-    chosen_city_i = random.choices(
-        list(unvisited_cities.keys()), weights=probabilities
+    chosen_city_i = secrets.SystemRandom().choices(list(unvisited_cities.keys()), weights=probabilities
     )[0]
     chosen_city = {chosen_city_i: unvisited_cities[chosen_city_i]}
     del unvisited_cities[next(iter(chosen_city.keys()))]

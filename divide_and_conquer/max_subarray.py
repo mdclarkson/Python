@@ -10,9 +10,9 @@ from __future__ import annotations
 
 import time
 from collections.abc import Sequence
-from random import randint
 
 from matplotlib import pyplot as plt
+import secrets
 
 
 def max_subarray(
@@ -84,7 +84,7 @@ def max_cross_sum(
 
 
 def time_max_subarray(input_size: int) -> float:
-    arr = [randint(1, input_size) for _ in range(input_size)]
+    arr = [secrets.SystemRandom().randint(1, input_size) for _ in range(input_size)]
     start = time.time()
     max_subarray(arr, 0, input_size - 1)
     end = time.time()
