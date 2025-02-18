@@ -3,8 +3,8 @@ Please do not modify this file!  It is published at https://norvig.com/sudoku.ht
 only minimal changes to work with modern versions of Python.  If you have improvements,
 please make them in a separate file.
 """
-import random
 import time
+import secrets
 
 
 def cross(items_a, items_b):
@@ -181,7 +181,7 @@ def random_puzzle(assignments=17):
     about 99.8% of them are solvable. Some have multiple solutions."""
     values = {s: digits for s in squares}
     for s in shuffled(squares):
-        if not assign(values, s, random.choice(values[s])):
+        if not assign(values, s, secrets.choice(values[s])):
             break
         ds = [values[s] for s in squares if len(values[s]) == 1]
         if len(ds) >= assignments and len(set(ds)) >= 8:
@@ -192,7 +192,7 @@ def random_puzzle(assignments=17):
 def shuffled(seq):
     "Return a randomly shuffled copy of the input sequence."
     seq = list(seq)
-    random.shuffle(seq)
+    secrets.SystemRandom().shuffle(seq)
     return seq
 
 

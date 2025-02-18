@@ -5,8 +5,7 @@
 
 URL: https://en.wikipedia.org/wiki/Random_graph
 """
-
-import random
+import secrets
 
 
 def random_graph(
@@ -39,7 +38,7 @@ def random_graph(
     # if the number randomly generated is greater than probability probability
     for i in range(vertices_number):
         for j in range(i + 1, vertices_number):
-            if random.random() < probability:
+            if secrets.SystemRandom().random() < probability:
                 graph[i].append(j)
                 if not directed:
                     # if the graph is undirected, add an edge in from j to i, either

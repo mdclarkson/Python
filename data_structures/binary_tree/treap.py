@@ -1,6 +1,5 @@
 from __future__ import annotations
-
-from random import random
+import secrets
 
 
 class Node:
@@ -11,7 +10,7 @@ class Node:
 
     def __init__(self, value: int | None = None):
         self.value = value
-        self.prior = random()
+        self.prior = secrets.SystemRandom().random()
         self.left: Node | None = None
         self.right: Node | None = None
 
