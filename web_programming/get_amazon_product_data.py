@@ -6,10 +6,9 @@ information will include title, URL, price, ratings, and the discount available.
 
 
 from itertools import zip_longest
-
-import requests
 from bs4 import BeautifulSoup
 from pandas import DataFrame
+from security import safe_requests
 
 
 def get_amazon_product_data(product: str = "laptop") -> DataFrame:
@@ -25,7 +24,7 @@ def get_amazon_product_data(product: str = "laptop") -> DataFrame:
         ),
         "Accept-Language": "en-US, en;q=0.5",
     }
-    soup = BeautifulSoup(requests.get(url, headers=header).text, features="lxml")
+    soup = BeautifulSoup(safe_requests.get(url, headers=header).text, features="lxml")
     # Initialize a Pandas dataframe with the column titles
     data_frame = DataFrame(
         columns=[

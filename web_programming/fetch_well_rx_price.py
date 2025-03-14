@@ -8,7 +8,8 @@ after providing the drug name and zipcode.
 from urllib.error import HTTPError
 
 from bs4 import BeautifulSoup
-from requests import exceptions, get
+from requests import exceptions
+from security import safe_requests
 
 BASE_URL = "https://www.wellrx.com/prescriptions/{0}/{1}/?freshSearch=true"
 
@@ -42,7 +43,7 @@ def fetch_pharmacy_and_price_list(drug_name: str, zip_code: str) -> list | None:
             return None
 
         request_url = BASE_URL.format(drug_name, zip_code)
-        response = get(request_url)
+        response = safe_requests.get(request_url)
 
         # Is the response ok?
         response.raise_for_status()

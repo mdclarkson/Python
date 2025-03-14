@@ -5,9 +5,8 @@ more convenient to use in Python web projects (e.g. Django or Flask-based)
 """
 
 from typing import NamedTuple
-
-import requests
 from lxml import html  # type: ignore
+from security import safe_requests
 
 
 class CovidData(NamedTuple):
@@ -18,7 +17,7 @@ class CovidData(NamedTuple):
 
 def covid_stats(url: str = "https://www.worldometers.info/coronavirus/") -> CovidData:
     xpath_str = '//div[@class = "maincounter-number"]/span/text()'
-    return CovidData(*html.fromstring(requests.get(url).content).xpath(xpath_str))
+    return CovidData(*html.fromstring(safe_requests.get(url).content).xpath(xpath_str))
 
 
 fmt = """Total COVID-19 cases in the world: {}

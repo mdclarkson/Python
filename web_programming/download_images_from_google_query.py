@@ -3,9 +3,8 @@ import os
 import re
 import sys
 import urllib.request
-
-import requests
 from bs4 import BeautifulSoup
+from security import safe_requests
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
@@ -39,7 +38,7 @@ def download_images_from_google_query(query: str = "dhaka", max_images: int = 5)
         "ijn": "0",
     }
 
-    html = requests.get("https://www.google.com/search", params=params, headers=headers)
+    html = safe_requests.get("https://www.google.com/search", params=params, headers=headers)
     soup = BeautifulSoup(html.text, "html.parser")
     matched_images_data = "".join(
         re.findall(r"AF_initDataCallback\(([^<]+)\);", str(soup.select("script")))
