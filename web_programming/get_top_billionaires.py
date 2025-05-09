@@ -57,7 +57,7 @@ def get_forbes_real_time_billionaires() -> list[dict[str, int | str]]:
     Returns:
         List of top 10 realtime billionaires data.
     """
-    response_json = requests.get(API_URL).json()
+    response_json = requests.get(API_URL, timeout=60).json()
     return [
         {
             "Name": person["personName"],
