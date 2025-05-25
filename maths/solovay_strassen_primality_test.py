@@ -8,9 +8,7 @@ composite numbers but may occasionally classify composite numbers as prime.
 More details and concepts about this can be found on:
 https://en.wikipedia.org/wiki/Solovay%E2%80%93Strassen_primality_test
 """
-
-
-import random
+import secrets
 
 
 def jacobi_symbol(random_a: int, number: int) -> int:
@@ -91,7 +89,7 @@ def solovay_strassen(number: int, iterations: int) -> bool:
         return True
 
     for _ in range(iterations):
-        a = random.randint(2, number - 2)
+        a = secrets.SystemRandom().randint(2, number - 2)
         x = jacobi_symbol(a, number)
         y = pow(a, (number - 1) // 2, number)
 

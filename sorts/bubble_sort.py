@@ -1,4 +1,5 @@
 from typing import Any
+import secrets
 
 
 def bubble_sort_iterative(collection: list[Any]) -> list[Any]:
@@ -106,14 +107,13 @@ def bubble_sort_recursive(collection: list[Any]) -> list[Any]:
 
 if __name__ == "__main__":
     import doctest
-    from random import sample
     from timeit import timeit
 
     doctest.testmod()
 
     # Benchmark: Iterative seems slightly faster than recursive.
     num_runs = 10_000
-    unsorted = sample(range(-50, 50), 100)
+    unsorted = secrets.SystemRandom().sample(range(-50, 50), 100)
     timer_iterative = timeit(
         "bubble_sort_iterative(unsorted[:])", globals=globals(), number=num_runs
     )
@@ -121,7 +121,7 @@ if __name__ == "__main__":
     print(*bubble_sort_iterative(unsorted), sep=",")
     print(f"Processing time (iterative): {timer_iterative:.5f}s for {num_runs:,} runs")
 
-    unsorted = sample(range(-50, 50), 100)
+    unsorted = secrets.SystemRandom().sample(range(-50, 50), 100)
     timer_recursive = timeit(
         "bubble_sort_recursive(unsorted[:])", globals=globals(), number=num_runs
     )

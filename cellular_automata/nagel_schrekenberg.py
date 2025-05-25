@@ -24,7 +24,7 @@ Examples for doctest:
 >>> simulate(construct_highway(5, 2, -2), 3, 0, 2)
 [[0, -1, 0, -1, 0], [0, -1, 0, -1, -1], [0, -1, -1, 1, -1], [-1, 1, -1, 0, -1]]
 """
-from random import randint, random
+import secrets
 
 
 def construct_highway(
@@ -48,10 +48,10 @@ def construct_highway(
     initial_speed = max(initial_speed, 0)
     while i < number_of_cells:
         highway[0][i] = (
-            randint(0, max_speed) if random_speed else initial_speed
+            secrets.SystemRandom().randint(0, max_speed) if random_speed else initial_speed
         )  # Place the cars
         i += (
-            randint(1, max_speed * 2) if random_frequency else frequency
+            secrets.SystemRandom().randint(1, max_speed * 2) if random_frequency else frequency
         )  # Arbitrary number, may need tuning
     return highway
 
@@ -98,7 +98,7 @@ def update(highway_now: list, probability: float, max_speed: int) -> list:
             dn = get_distance(highway_now, car_index) - 1
             # We can't have the car causing an accident
             next_highway[car_index] = min(next_highway[car_index], dn)
-            if random() < probability:
+            if secrets.SystemRandom().random() < probability:
                 # Randomly, a driver will slow down
                 next_highway[car_index] = max(next_highway[car_index] - 1, 0)
     return next_highway

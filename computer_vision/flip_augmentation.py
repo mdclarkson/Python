@@ -1,9 +1,9 @@
 import glob
 import os
-import random
 from string import ascii_lowercase, digits
 
 import cv2
+import secrets
 
 """
 Flip image and bounding box for computer vision task
@@ -120,7 +120,7 @@ def random_chars(number_char: int = 32) -> str:
     """
     assert number_char > 1, "The number of character should greater than 1"
     letter_code = ascii_lowercase + digits
-    return "".join(random.choice(letter_code) for _ in range(number_char))
+    return "".join(secrets.choice(letter_code) for _ in range(number_char))
 
 
 if __name__ == "__main__":

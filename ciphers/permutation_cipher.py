@@ -7,7 +7,7 @@ determine the order of character rearrangement.
 
 For more info: https://www.nku.edu/~christensen/1402%20permutation%20ciphers.pdf
 """
-import random
+import secrets
 
 
 def generate_valid_block_size(message_length: int) -> int:
@@ -30,7 +30,7 @@ def generate_valid_block_size(message_length: int) -> int:
         for block_size in range(2, message_length + 1)
         if message_length % block_size == 0
     ]
-    return random.choice(block_sizes)
+    return secrets.choice(block_sizes)
 
 
 def generate_permutation_key(block_size: int) -> list[int]:
@@ -49,7 +49,7 @@ def generate_permutation_key(block_size: int) -> list[int]:
         [2, 0, 1, 3]
     """
     digits = list(range(block_size))
-    random.shuffle(digits)
+    secrets.SystemRandom().shuffle(digits)
     return digits
 
 

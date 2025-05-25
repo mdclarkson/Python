@@ -1,9 +1,9 @@
-import random
 import sys
 
 from maths.greatest_common_divisor import gcd_by_iterative
 
 from . import cryptomath_module as cryptomath
+import secrets
 
 SYMBOLS = (
     r""" !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`"""
@@ -76,8 +76,8 @@ def decrypt_message(key: int, message: str) -> str:
 
 def get_random_key() -> int:
     while True:
-        key_b = random.randint(2, len(SYMBOLS))
-        key_b = random.randint(2, len(SYMBOLS))
+        key_b = secrets.SystemRandom().randint(2, len(SYMBOLS))
+        key_b = secrets.SystemRandom().randint(2, len(SYMBOLS))
         if gcd_by_iterative(key_b, len(SYMBOLS)) == 1 and key_b % len(SYMBOLS) != 0:
             return key_b * len(SYMBOLS) + key_b
 

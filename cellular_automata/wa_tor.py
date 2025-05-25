@@ -13,9 +13,9 @@ to result in one of the three possible results.
 """
 
 from collections.abc import Callable
-from random import randint, shuffle
 from time import sleep
 from typing import Literal
+import secrets
 
 WIDTH = 50  # Width of the Wa-Tor planet
 HEIGHT = 50  # Height of the Wa-Tor planet
@@ -165,7 +165,7 @@ class WaTor:
         2
         """
         while True:
-            row, col = randint(0, self.height - 1), randint(0, self.width - 1)
+            row, col = secrets.SystemRandom().randint(0, self.height - 1), secrets.SystemRandom().randint(0, self.width - 1)
             if self.planet[row][col] is None:
                 self.planet[row][col] = Entity(prey=prey, coords=(row, col))
                 return
@@ -196,7 +196,7 @@ class WaTor:
         False
         """
         entities = self.get_entities()
-        shuffle(entities)
+        secrets.SystemRandom().shuffle(entities)
 
         if len(entities) >= MAX_ENTITIES - MAX_ENTITIES / 10:
             prey = [entity for entity in entities if entity.prey]
@@ -446,12 +446,12 @@ class WaTor:
             all_entities = self.get_entities()
 
             for __ in range(len(all_entities)):
-                entity = all_entities.pop(randint(0, len(all_entities) - 1))
+                entity = all_entities.pop(secrets.SystemRandom().randint(0, len(all_entities) - 1))
                 if entity.alive is False:
                     continue
 
                 directions: list[Literal["N", "E", "S", "W"]] = ["N", "E", "S", "W"]
-                shuffle(directions)  # Randomly shuffle directions
+                secrets.SystemRandom().shuffle(directions)  # Randomly shuffle directions
 
                 if entity.prey:
                     self.perform_prey_actions(entity, directions)
@@ -462,7 +462,7 @@ class WaTor:
 
                     if surrounding_prey:
                         # Again, randomly shuffle directions
-                        shuffle(surrounding_prey)
+                        secrets.SystemRandom().shuffle(surrounding_prey)
                         surrounding_prey_coords = surrounding_prey[0].coords
 
                     self.perform_predator_actions(

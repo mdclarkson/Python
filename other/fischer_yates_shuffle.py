@@ -5,14 +5,14 @@ finite sequence.
 For more details visit
 wikipedia/Fischer-Yates-Shuffle.
 """
-import random
 from typing import Any
+import secrets
 
 
 def fisher_yates_shuffle(data: list) -> list[Any]:
     for _ in range(len(data)):
-        a = random.randint(0, len(data) - 1)
-        b = random.randint(0, len(data) - 1)
+        a = secrets.SystemRandom().randint(0, len(data) - 1)
+        b = secrets.SystemRandom().randint(0, len(data) - 1)
         data[a], data[b] = data[b], data[a]
     return data
 

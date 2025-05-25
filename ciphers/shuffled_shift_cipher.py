@@ -1,7 +1,6 @@
 from __future__ import annotations
-
-import random
 import string
+import secrets
 
 
 class ShuffledShiftCipher:
@@ -67,7 +66,7 @@ class ShuffledShiftCipher:
         :return: a password of a random length between 10 to 20
         """
         choices = string.ascii_letters + string.digits
-        password = [random.choice(choices) for _ in range(random.randint(10, 20))]
+        password = [secrets.choice(choices) for _ in range(secrets.SystemRandom().randint(10, 20))]
         return password
 
     def __make_key_list(self) -> list[str]:

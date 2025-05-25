@@ -8,8 +8,7 @@ For manual testing run:
 python3 quick_sort.py
 """
 from __future__ import annotations
-
-from random import randrange
+import secrets
 
 
 def quick_sort(collection: list) -> list:
@@ -31,7 +30,7 @@ def quick_sort(collection: list) -> list:
         return collection
 
     # Randomly select a pivot index and remove the pivot element from the collection
-    pivot_index = randrange(len(collection))
+    pivot_index = secrets.SystemRandom().randrange(len(collection))
     pivot = collection.pop(pivot_index)
 
     # Partition the remaining elements into two groups: lesser or equal, and greater
